@@ -5,7 +5,7 @@ To run, use the following commands
 npm install
 
 on Mac or Linux, use  
-npm install
+npm start
 
 on Windows, use  
-& npm install
+& npm start
