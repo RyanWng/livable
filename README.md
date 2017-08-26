@@ -9,3 +9,6 @@ npm start
 
 on Windows, use  
 & npm start
+
+then go to  
+http://localhost:3000/
