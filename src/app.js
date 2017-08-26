@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var query = require('./routes/query');
+var LongLatQuery = require('./routes/query/LongLat')
 
 var app = express();
 
@@ -24,6 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/query', query);
+app.use('/query/LongLat', LongLatQuery);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

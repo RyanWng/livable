@@ -35,8 +35,31 @@ request.get({url:url, oauth:oauth}, function callback(error, response, body) {
   if (!error && response.statusCode == 200) {
     console.log("Not an error");
     var info = JSON.parse(body);
-    console.log(info);
-    res.send("We received the response");
+
+ //  console.log(info);
+    var listing = [];
+    
+    for(var i in info.List) {
+
+        var item = info.List[i];
+
+        console.log(item);
+
+        listing.push({
+            "latitude"          : item.GeographicLocation.Latitude,
+            "longitude"         : item.GeographicLocation.Longitude,
+            "price_display"     : item.PriceDisplay,
+            "image"             : item.PictureHref,
+            "address"           : item.Address,   
+            "suburb"            : item.Suburb,
+            "district"          : item.District,
+            "bedrooms"          : item.Bedrooms,
+            "description"       : item.ShortDescription,
+            "rent_per_week"     : item.RentPerWeek,
+        });
+    }
+    
+    res.send(JSON.stringify(listing));
   } else {
     console.log(error + response.statusCode);
     res.send('JSON stringify error');
