@@ -5,10 +5,10 @@ var router = express.Router();
 /* GET users listing. */
 router.get('/', function(req, res, next) {
 
-var minLat = parseInt(req.query.minLat);
-var maxLat = parseInt(req.query.maxLat);
-var minLong = parseInt(req.query.minLong);
-var maxLong = parseInt(req.query.maxLong);
+var minLat = parseFloat(req.query.minLat);
+var maxLat = parseFloat(req.query.maxLat);
+var minLong = parseFloat(req.query.minLong);
+var maxLong = parseFloat(req.query.maxLong);
 
 // console.log(minLat + " " + maxLat);
 // var halfLat = (minLat + maxLat) / 2;
@@ -31,6 +31,7 @@ var qs = require('querystring')
     }
   , url = str
   ;
+  console.log("str: ",str);
 request.get({url:url, oauth:oauth}, function callback(error, response, body) {
   if (!error && response.statusCode == 200) {
     console.log("Not an error");
@@ -43,7 +44,7 @@ request.get({url:url, oauth:oauth}, function callback(error, response, body) {
 
         var item = info.List[i];
 
-        console.log(item);
+        console.log("item: "+item);
 
         listing.push({
             "latitude"          : item.GeographicLocation.Latitude,
@@ -59,6 +60,7 @@ request.get({url:url, oauth:oauth}, function callback(error, response, body) {
         });
     }
     
+    console.log("listing: "+listing);
     res.send(JSON.stringify(listing));
   } else {
     console.log(error + response.statusCode);
