@@ -1,18 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Livable</title>
-	
-	
-	<link rel="stylesheet" type="text/css" href="./stylesheets/style.css">
+    <meta charset="UTF-8">
+    <title>Livable</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="./stylesheets/style.css">
+    <link rel="stylesheet" type="text/css" href="./stylesheets/job.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
 </head>
 <body>
 <div id="mymap"></div>
 
 
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDWo1Kv30baMBsYB6mTiRJR525fkkcjGkY"></script>
+<button id="toggleBtnJobList" class="btn btn-success">Display Jobs</button>
+<button id="toggleBtnJobInfo" class="btn btn-success">More Job Info</button>
+
+<div id="jobList">
+
+    <div class="body-wrapper">
+        <div class="list-wrapper">
+            <div>
+                <a href="http://www.trademe.co.nz/jobs/it/programming-development/listing-1402823567.htm">
+                    <p>
+                    <h3>Mobile Developer</h3></p>
+                    <p><i class="fa fa-map-marker"></i>Auckland City, Auckland</p>
+                    <p><strong>Job Description: </strong>You'll need to balance revenue generating initiatives with
+                        great solutions that surprise and delight users. Our apps are native and make use of a wide
+                        range of APIs. You'll play an integral part in shaping our roadmap and delivering exceptional
+                        advertising products fast!
+                </a>
+            </div>
+            <div>
+                <a href="http://www.trademe.co.nz/jobs/it/programming-development/listing-1401962797.htm">
+                    <p>
+                    <h3>Front End Developer</h3></p>
+                    <p><i class="fa fa-map-marker"></i>Auckland City, Auckland</p>
+                    <p><strong>Job Description: </strong>We are currently looking for Senior Front end Developers to
+                        work in an initial 6-8 weeks contract, with an early September start. This contract will see you
+                        working with a leading digital agency based in the CBD. You will work closely with multiple
+                        teams within the business and guide customers with the best possible solutions, predominantly
+                        with constant focus of delivering high-quality front end development.
+                    </p>
+                </a>
+            </div>
+            <div>
+                <a href="http://www.trademe.co.nz/jobs/it/web-design/listing-1401116591.htm">
+                    <p>
+                    <h3>Product Designer</h3></p>
+                    <p><i class="fa fa-map-marker"></i>Auckland City, Auckland</p>
+                    <p><strong>Job Description: </strong>It's a new era for Trade Me and with that comes a new way of
+                        thinking. We're looking for a smart and adaptable UX/Product Designer who thrives in a team
+                        environment. You will join one of our newly formed Christchurch Marketplace squads.</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="jobInfo">
+    <div class="body-wrapper">
+
+
+        <h3>Job Amount by Suburb</h3>
+
+        <div class="style-1">
+            <div>
+                <em>Cars</em>
+                <span>127</span>
+            </div>
+            <div>
+                <em>Trucks</em>
+                <span>98</span>
+            </div>
+            <div>
+                <em>Boats</em>
+                <span>34</span>
+            </div>
+            <div>
+                <em>Trains</em>
+                <span>148</span>
+            </div>
+            <div>
+                <em>Hovercraft</em>
+                <span>10</span>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<script type="text/javascript" src="./scripts/jquery-2.1.1.min.js"></script>
+<script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDWo1Kv30baMBsYB6mTiRJR525fkkcjGkY"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/TweenMax.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var li = $('.list-wrapper div');
+        //debugger;
+        TweenMax
+            .staggerTo(li, 0.25, {css: {opacity: "1", display: "block"}}, 0.25);
+        //.from(a, 2, {autoAlpha: 0});
+        //.from(h3, 2, {autoAlpha: 0});
+    });
+
+</script>
 <script type="text/javascript" src="./scripts/map.js"></script>
+<script type="text/javascript" src="./scripts/job.js"></script>
 
 </body>
 </html>
