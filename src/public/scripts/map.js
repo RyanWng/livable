@@ -46,19 +46,6 @@
 	}
 
 
-	function getMarkerColour(averagePrice) {
-		if (averagePrice < 100) {
-			return '#440000';
-		} else if (averagePrice < 200) {
-			return '#880000';
-		} else if (averagePrice < 300) {
-			return '#BB0000';
-		} else {
-			return '#FF0000';
-		}
-	}
-
-
 	function getHouseData(minLat,minLng,maxLat,maxLng){
 		$.getJSON(
 				"/query/",
@@ -66,6 +53,7 @@
 					'maxLat':maxLat, 'maxLong':maxLng
 				}, 
 				function(data){
+					console.log(data.pop());
 					clearMarkers();
 	        $.each(data, function(key, val){
 	            addMarkers(val);
@@ -74,45 +62,42 @@
 	}
 
 
-	function addMarkers(data) {
+	function addMarkers(property) {
 
-		//clear markers array
-
-		for (var city in data) {
-
-		    var cityCircle = new google.maps.Circle({
-		      strokeColor: '#FF0000',
-		      strokeOpacity: 0.0,
-		      strokeWeight: 0,
-		      fillColor: '#FF0000',//getMarkerColour(citymap[city].startPrice),
-		      fillOpacity: 0.1,
+				var price = fetchPrice(property.price_display);
+		    var circleMarker = new google.maps.Circle({
+		    	strokeColor: '#ffffff',
+					strokeOpacity: 0.0,
+          strokeWeight: 0,
+		      fillColor: getMarkerColour(price),
+		      fillOpacity: 0.55,
 		      map: map,
-		      center: new google.maps.LatLng(data.latitude, data.longitude),
+		      center: new google.maps.LatLng(property.latitude, property.longitude),
 		      radius: 500	
 	    	});
 
-	    	markers.push(cityCircle);
+	    	markers.push(circleMarker);
 
-	    	google.maps.event.addListener(cityCircle, 'click', function(ev){
+	    	google.maps.event.addListener(circleMarker, 'click', function(ev){
 	    		// var infowindow = new google.maps.InfoWindow();
 			infowindow.setContent(
 				"<div class='info-wrap'>"+
 					"<div class='prop-img'>"+
-						"<img src='"+data.image+"' alt='propert image' class='thumb'>"
+						"<img src='"+property.image+"' alt='propert image' class='thumb'>"
 					+"</div>"
 
 					+"<div class='prop-info'>"+
-						"<h3>"+data.price_display+"</h3>"+
-						"<p>"+data.address+"</p>"
+						"<h3>"+property.price_display+"</h3>"+
+						"<p>"+property.address+"</p>"
 						+"<a href='"+"#"+"'>Link</a>"
 					+"</div>"
 				+"</div>"
 			);
 
-		    infowindow.setPosition(cityCircle.getCenter());
+		    infowindow.setPosition(circleMarker.getCenter());
 		    infowindow.open(map)
 			});
-  		}
+  		
 
 	}
 
@@ -126,6 +111,30 @@
 	}
 
 
+	function fetchPrice(priceString){
+		var price = Number(priceString.replace(/[^0-9\.-]+/g,""));
+		return price;
+	}
+
+
+
+	function getMarkerColour(averagePrice) {
+		if (averagePrice < 350) {
+			return '#13de57';
+		} else if (averagePrice < 450) {
+			return '#35de13';
+		} else if (averagePrice < 550) {
+			return '#d3e21b';
+		} else if (averagePrice < 800) {
+			return '#e2c01b';
+		}else if (averagePrice < 1100) {
+			return '#e97308';
+		}else if (averagePrice < 1500) {
+			return '#e94608';
+		}else if (averagePrice < 5500) {
+			return '#f30404';
+		}
+	}
 
 
 }());
