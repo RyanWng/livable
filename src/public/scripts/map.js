@@ -60,17 +60,23 @@
 
 
 	function getHouseData(minLat,minLng,maxLat,maxLng){
-		$.getJSON("/query/", {'minLat':minLat,'minLong':minLng,
-					 'maxLat':maxLat, 'maxLong':maxLng}, function(data){
-        
-        $.each(data, function(key, val){
-            addMarkers(val);
-        });
+		$.getJSON(
+				"/query/",
+				{'minLat':minLat,'minLong':minLng,
+					'maxLat':maxLat, 'maxLong':maxLng
+				}, 
+				function(data){
+					clearMarkers();
+	        $.each(data, function(key, val){
+	            addMarkers(val);
+	        });
     })
 	}
 
 
 	function addMarkers(data) {
+
+		//clear markers array
 
 		for (var city in data) {
 
@@ -79,7 +85,7 @@
 		      strokeOpacity: 0.0,
 		      strokeWeight: 0,
 		      fillColor: '#FF0000',//getMarkerColour(citymap[city].startPrice),
-		      fillOpacity: 0.35,
+		      fillOpacity: 0.1,
 		      map: map,
 		      center: new google.maps.LatLng(data.latitude, data.longitude),
 		      radius: 500	
@@ -109,6 +115,19 @@
   		}
 
 	}
+
+
+	function clearMarkers(){
+		markers.forEach((marker)=>{
+			marker.setMap(null);
+		});
+
+		markers.length = 0; 
+	}
+
+
+
+
 }());
 
 
