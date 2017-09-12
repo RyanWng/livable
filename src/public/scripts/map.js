@@ -73,29 +73,31 @@
 		      fillOpacity: 0.55,
 		      map: map,
 		      center: new google.maps.LatLng(property.latitude, property.longitude),
-		      radius: 500	
+		      radius: 200	
 	    	});
 
 	    	markers.push(circleMarker);
 
+	    	adjustMarkerRadiusByZoom();
+
 	    	google.maps.event.addListener(circleMarker, 'click', function(ev){
 	    		// var infowindow = new google.maps.InfoWindow();
-			infowindow.setContent(
-				"<div class='info-wrap'>"+
-					"<div class='prop-img'>"+
-						"<img src='"+property.image+"' alt='propert image' class='thumb'>"
-					+"</div>"
+					infowindow.setContent(
+						"<div class='info-wrap'>"+
+							"<div class='prop-img'>"+
+								"<img src='"+property.image+"' alt='propert image' class='thumb'>"
+							+"</div>"
 
-					+"<div class='prop-info'>"+
-						"<h3>"+property.price_display+"</h3>"+
-						"<p>"+property.address+"</p>"
-						+"<a href='"+"#"+"'>Link</a>"
-					+"</div>"
-				+"</div>"
-			);
+							+"<div class='prop-info'>"+
+								"<h3>"+property.price_display+"</h3>"+
+								"<p>"+property.address+"</p>"
+								+"<a href='"+"#"+"'>Link</a>"
+							+"</div>"
+						+"</div>"
+					);
 
-		    infowindow.setPosition(circleMarker.getCenter());
-		    infowindow.open(map)
+				  infowindow.setPosition(circleMarker.getCenter());
+				  infowindow.open(map)
 			});
   		
 
@@ -136,6 +138,15 @@
 		}
 	}
 
+	function adjustMarkerRadiusByZoom(){
+		// var factor = map.getZoom();
+		// marker.setRadius(marker.)
+
+		markers.forEach((marker)=>{
+      var p = Math.pow(2, (19 - map.getZoom()));
+      marker.setRadius(p * 1128.497220 * 0.0027);
+		});
+	}
 
 }());
 
